@@ -1,0 +1,49 @@
+name:                watchn
+version:             0.1.0.0
+synopsis:            Watch and go command
+description:         Please see README.md
+homepage:            https://github.com/satosystems/watchn#readme
+license:             Apache-2.0
+license-file:        LICENSE
+author:              Satoshi Ogata
+maintainer:          satosystems@gmail.com
+copyright:           (c) 2017 Satoshi Ogata
+category:            program
+build-type:          Simple
+extra-source-files:  README.md
+                   , Makefile
+cabal-version:       >= 1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Watcher
+  ghc-options:         -Wall
+  build-depends:       base >= 4.7 && < 5
+                     , fsnotify
+                     , unix
+  default-language:    Haskell2010
+
+executable watchn
+  hs-source-dirs:      app
+  main-is:             Main.hs
+  ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , fsnotify
+                     , process
+                     , split
+                     , watchn
+  default-language:    Haskell2010
+
+test-suite watchn-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  build-depends:       base
+                     , watchn
+  ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/satosystems/watchn
+

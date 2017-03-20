@@ -1,0 +1,26 @@
+cache:
+  directories:
+  - $HOME/.stack
+
+matrix:
+  include:
+    - os: osx
+      before_install:
+        - brew update
+        - brew install haskell-stack
+    - os: linux
+      before_install:
+        - mkdir -p ~/.local/bin
+        - export PATH=$HOME/.local/bin:$PATH
+        - travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+
+before_script:
+  - uname -a
+  - stack --version
+  - stack setup
+  - stack exec -- ghc --version
+  - stack build
+
+script:
+  - stack test
+
