@@ -38,9 +38,9 @@ watchAnd c mfn ef = watchWith $ \event -> do
     (Modified filePath _) -> if "M" `isInfixOf` ef then run c filePath else return ()
     (Removed filePath _) -> if "R" `isInfixOf` ef then run c filePath else return ()
  where
-  match (Just fn) (Added filePath _) = fn == filePath
-  match (Just fn) (Modified filePath _) = fn == filePath
-  match (Just fn) (Removed filePath _) = fn == filePath
+  match (Just fn) (Added filePath _) = fn `isSuffixOf` filePath
+  match (Just fn) (Modified filePath _) = fn `isSuffixOf` filePath
+  match (Just fn) (Removed filePath _) = fn `isSuffixOf` filePath
   match _ _ = True
 
 run :: Command -> FilePath -> IO ()
@@ -55,9 +55,9 @@ showUsage :: IO ()
 showUsage = hPutStrLn stderr $ unlines usage
  where
   usage = [ "Usage:"
-          , "  watchn -c 'open -g -a Preview out.png' -f 'out.png' -e M"
+          , "  watchn -c 'open ?' -f out.png -e M"
           , "  watchn -c \"cat ?\" -e AM"
-          , "  watchn -c 'touch .lock' -f '.lock' -e R"
+          , "  watchn -c 'touch ?' -f .lock -e R"
           , ""
           , "Available options:"
           , "  -c 'command'       Command when matched file"

@@ -6,6 +6,10 @@ build:
 clean:
 	rm -rf .stack-work
 
+.PHONY: install
+install: build
+	stack install watchn
+
 .PHONY: test
 test:
 	stack test

@@ -8,9 +8,9 @@ Watch file and run command.
 
 ```
 Usage:
-  watchn -c 'open -g -a Preview out.png' -f 'out.png' -e M
+  watchn -c 'open ?' -f out.png -e M
   watchn -c "cat ?" -e AM
-  watchn -c 'touch .lock' -f '.lock' -e R
+  watchn -c 'touch ?' -f .lock -e R
 
 Available options:
   -c 'command'       Command when matched file
@@ -20,8 +20,8 @@ Available options:
                        A: Added
                        M: Modified
                        R: Removed
-  --help             Show this help
-  --version          Show version
+  -H|--help          Show this help
+  -V|--version       Show version
 ```
 
 ## Installation
